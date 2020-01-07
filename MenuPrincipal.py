@@ -1,165 +1,132 @@
-import re
-import datetime
-def gestaoFuncionario():
-    print("1 - Inserir")
-    print("2 - Pesquisar")
-    print("3 - Alterar")
-    print("4 - Eliminar")
-    print("5 - Pesqusar e Ordenar")
-    print("6 - Contar")
-    print("7 - Agrupar")
-    print("8 - Agrupar e Contar")
-    print("9 - Exportar")
-    print("10 - Gerar Organogramas")
+# -*- coding: utf-8 -*-
+
+NomeFicheiroServicos = "servicos.csv"
+
+def Menu(Titulo, Opcoes, np):
+    print(Titulo)
+    print()
+    for i in range(np):
+        print( i + 1 , " - ", Opcoes[i])
+    print( "0 - Terminar")
     while True:
-        x = input('Escolha uma das opções: ')
-        if x == '0':
-            InserirFuncionario()
-        elif x == '1':
-            InserirFuncionario()
-        elif x == '2':
-            InserirFuncionario()
-        elif x == '3':
-            InserirFuncionario()
-        elif x == '4':
-            InserirFuncionario()
-        elif x == '5':
-            InserirFuncionario()
-        elif x == '6':
-            InserirFuncionario()
-        elif x == '7':
-            InserirFuncionario()
-        elif x == '8':
-            InserirFuncionario()
-        elif x == '9':
-            InserirFuncionario()
-        elif x == '10':
-            InserirFuncionario()
-        else:
-            print("Esta opção é inválida!")
-
-def InserirFuncionario():
-    nomeficheiro = "dados/funcionarios.txt"
-    IDFuncionario = 2
-    IDCategoria = 0  # input("ID Categoria? ")
-    IDTitulo = 0  # input("ID Título? ")
-    IDServico = 0  # input("ID Serviço? ")
-    IDFuncionarioChefe = 0  # input("ID Funcionário Chefe? ")
-
-    while True:
-        CdFuncionario = input("Código do Funcionário? ")
-        if re.search(
-            "[A-Z]{1,10}", 
-            CdFuncionario
-            ) :
+        print("Opção?")
+        op = int(input())
+        if (op >= 0 and op <= np):
             break
-        else:
-            continue
+    return op
 
-    while True:
-        NmFuncionario = input("Nome Funcionário? ")
-        if re.search(
-            "^[A-Z][a-zA-Z]{3,}(?: [A-Z][a-zA-Z]*){0,4}$", 
-            NmFuncionario
-            ) :
-            break
-        else:
-            continue
-
-    while True :
-        Email = input("Email? ")
-        if re.search(
-            "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", 
-            Email
-            ) :
-            break
-        else:
-            continue
-
-    while True:
-        Telemovel = input("Telemóvel? ")
-        if re.search(
-            "9[1236]\d{7}", 
-            Telemovel
-            ) :
-            break
-        else:
-            continue
-
-    while True:
-        NIF = input("NIF? ")
-        if idValidNIF(NIF):
-            break
-        else:
-            continue
-
-    while True:
-        NCC = input("Número de Cartão de Cidadão? ")
-        if isValidNCC(NCC) :
-            break
-        else:
-            continue
-
-    while True :
-        DataAdmissao = input("Data de Admissão? ")
-        if isDataAnterior(DataAdmissao) == '0' :
-            break
-        else:
-            continue
-
-    while True:
-        Vencimento = input("Vencimento? ")
-        if re.search(
-            "[0-9]\d{8},[0-9]\d{2}", 
-            Vencimento
-            ) :
-            break
-        else:
-            continue
-
-    f = open(nomeficheiro, "at")
-    print(
-        IDFuncionario,
-        CdFuncionario,
-        NmFuncionario,
-        IDCategoria,
-        IDTitulo,
-        IDServico,
-        IDFuncionarioChefe,
-        Email,
-        Telemovel,
-        NIF,
-        NCC,
-        DataAdmissao,
-        Vencimento,
-        sep=";",
-        file=f
-    )
+def InserirServico():
+    # Ler dados
+    # Abir ficheiro
+    # Escrever dados no fim
+    # fechar ficheiro
+    print ("Inserir Serviço:")
+    # Ler dados
+    IDServico = int(input("ID?"))
+    NmServico = input("Nome ?")
+    NumeroFuncionarios = int(input("Número de funcionarios ?"))
+    IDFuncionarioResponsavel = int(input("ID Responsavel?"))
+    # Abir ficheiro
+    f = open (NomeFicheiroServicos, "at")
+    print(IDServico, NmServico, NumeroFuncionarios,
+          IDFuncionarioResponsavel, file=f, sep=";")
     f.close()
-    print("Funcionário foi inserido com sucesso!")
+def ListarServicosTodos ():
+    f = open(NomeFicheiroServicos, "rt")
+    servicos = f.readlines()
+    f.close()
+    print(servicos)
+    for i in range(len(servicos)):
+        ID, Servico, NF, IDResponsavel = servicos [i].split(";")
+        IDResponsavel =  IDResponsavel.strip('\n')
+        print(ID, Servico, NF, IDResponsavel)
 
-def isValidNCC(str):
-    return True
+def ExportarServicosTodosHTML ():
+	import os
+        f = open(NomeFicheiroServicos, "rt")
+        servicos = f.readlines()
+        f.close()
+        f = open("ServicosTodos.html", "wt")
+    print("<table>", file=f)
+    for i in range(len(servicos)):
+        ID, Servico, NF, IDResponsavel = servicos [i].split(";")
+        IDResponsavel =  IDResponsavel.strip('\n')
+        print("<tr>", file=f)
+        print("<td>", ID, "</td>", file=f)
+        print("<td>", Servico , "</td>", file=f)
+        print("<td>", NF, "</td>", file=f)
+        print("<td>", IDResponsavel , "</td>", file=f)
+        print("</tr>", file=f)
+	print("</table>", file=f)
+	f.close()
+	os.exec("ServicosTodos.html");
 
-def idValidNIF(num):
-    return True
 
-def isDataAnterior(data_texto):
-    dataAtual = datetime.date.today()
-    formato = '%Y-%m-%d %h %m %s';
+def PesquisaServicosNome ():
+    f = open(NomeFicheiroServicos, "rt")
+    servicos = f.readlines()
+    f.close()
+    nomeProcurar = input("Nome a procurar")
+    for i in range(len(servicos)):
+        ID, Servico, NF, IDResponsavel = servicos [i].split(";")
+        Servico = str(Servico)
+        IDResponsavel =  IDResponsavel.strip('\n')
+        #if nomeProcurar == Servico:   #pesquisa exata
+			#print(ID, Servico, NF, IDResponsavel)
+			#break
+        if Servico.find(nomeProcurar) >= 0:     # serviço contem texto nomeProcurar
+            print("%4d %-30s %2d %4d" % (ID, Servico, NF, IDResponsavel))
 
-    try:
-       data = datetime.strptime(data_texto, formato)
-    except ValueError:
-        print("Data inválida")
+def LerServicosVetor():
+  f = open(NomeFicheiroServicos, "rt")
+  servicos = f.readlines()
+  f.close()
+  return servicos
 
-    if data <= dataAtual.strftime(formato):
-        #if re.search("[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1]) (2[0-3]|[01][0-9]):[0-5][0-9]", data_texto):
-        #    print(1)
-        #else :
-        #    print(0)
-        print('1')
-    else:
-        print('0')
+def PesquisaServicosNF ():
+	# lista serviços com NP entre dois valores min, max
+	servicos = LerServicosVetor()
+    minNF = int (input("Mínimo de funcionários?"))
+	maxNF = int (input("Máximo de funcionários?"))
+    for i in range(len(servicos)):
+        ID, Servico, NF, IDResponsavel = servicos [i].split(";")
+        Servico = str(Servico)
+		NF = int(NF)
+        IDResponsavel =  IDResponsavel.strip('\n')
+        if NF >= minNF and NF <= maxNF: 
+            print("%4d %-30s %2d %4d" % (ID, Servico, NF, IDResponsavel))
 
-gestaoFuncionario()
+def MenuGestaoServicos():
+    Titulo = "Gestão de Servicos"
+    Opcoes = ["Inserir", "Alterar", "Eliminar", "Listar todos", "Pesquisa por nome",
+              "Pesquisar por número de funcionários"]
+    np  = 6
+    while True:
+        op = Menu(Titulo, Opcoes, np)
+        if op == 1:
+            InserirServico()
+        elif op == 2:
+            print(op)
+            #PesquisarServicoPorNome()
+        if op == 4:
+            ListarServicosTodos()
+        if op == 5:
+            PesquisaServicosNome()
+        elif op == 0:
+            break;
+
+def MenuPrincipal():
+    Titulo = "Menu principal"
+    Opcoes = ["Gestão de Serviços", "Gestão de  Categorias",
+              "Gestão de Títulos", "Gestão dos Funcionários", "..."]
+    np  = 5
+    while True:
+        op = Menu(Titulo, Opcoes, np)
+        if op == 1:
+            MenuGestaoServicos()
+        elif op == 2:
+            print (op)
+            # GestaoPaises()
+        elif op == 0:
+            break;
+MenuPrincipal()

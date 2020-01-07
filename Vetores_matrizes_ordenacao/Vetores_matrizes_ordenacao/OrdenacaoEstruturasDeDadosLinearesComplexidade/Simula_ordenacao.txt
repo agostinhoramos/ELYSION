@@ -1,0 +1,14 @@
+
+
+
+
+h = 4;
+for (i = l+h; i <= r; i++) {
+itemType v = a[i];
+j = i;
+while (j >= l+h && less(v, a[j-h])) {
+a[j] = a[j-h];
+j -= h;
+}
+a[j] = v;
+}

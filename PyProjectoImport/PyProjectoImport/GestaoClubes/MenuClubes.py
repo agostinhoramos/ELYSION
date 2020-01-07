@@ -1,0 +1,2 @@
+def Menu():
+    print("Clubes")
