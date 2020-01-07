@@ -128,7 +128,7 @@ def InserirFuncionario():
         IDFuncionarioChefe,
         Email,
         Telemovel,
-        Nif,
+        NIF,
         NCC,
         DataAdmissao,
         Vencimento,
