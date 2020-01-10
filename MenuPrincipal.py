@@ -1,8 +1,12 @@
 # REGX: https://regex101.com/
 import re
 import datetime
+import string
 
-def gestao():
+from Fn import isValid
+from Fn import inFile
+
+def menu():
     print("1 - Inserir")
     print("2 - Pesquisar")
     print("3 - Alterar")
@@ -13,8 +17,10 @@ def gestao():
     print("8 - Agrupar e Contar")
     print("9 - Exportar")
     print("10 - Gerar Organogramas")
+    print("0 - Sair")
 
-    while True:
+    opc = '0'
+    while opc == '0' :
         x = input('Escolha uma das opções: ')
         if x == '1':
             Inserir()
@@ -36,21 +42,28 @@ def gestao():
             Exportar()
         elif x == '10':
             GerarOrganograma()
+        elif x == '0':
+            opc = '1'
         else:
             print("Esta opção é inválida!")
+        
+        if opc == '0':
+            opc = input("Deseja sair (Sim-1 ou Não-0)? ")
+        else:
+            print("\n")
 
 
 
 def Inserir():
-    nomeficheiro = "dados/s.txt"
-    ID = 2
+    FileName = "Dados/Funcionarios.txt"
+    ID = inFile.NextLine(FileName)
     IDCategoria = 0  # input("ID Categoria? ")
     IDTitulo = 0  # input("ID Título? ")
     IDServico = 0  # input("ID Serviço? ")
     IDChefe = 0  # input("ID Funcionário Chefe? ")
 
     while True:
-        Cd = input("Código do Funcionário? ")
+        Cd = "ASDERFDSDE"#input("Código do Funcionário? ")
         if re.search(
             "[A-Z]{1,10}", 
             Cd
@@ -60,7 +73,7 @@ def Inserir():
             continue
 
     while True:
-        Nm = input("Nome Funcionário? ")
+        Nm = "Agostinho Ramos"#input("Nome Funcionário? ")
         if re.search(
             "^[A-Z][a-zA-Z]{3,}(?: [A-Z][a-zA-Z]*){0,4}$", 
             Nm
@@ -70,7 +83,7 @@ def Inserir():
             continue
 
     while True :
-        Email = input("Email? ")
+        Email = "agostinhopina95@gmail.com"#input("Email? ")
         if re.search(
             "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", 
             Email
@@ -80,7 +93,7 @@ def Inserir():
             continue
 
     while True:
-        Telemovel = input("Telemóvel? ")
+        Telemovel = "934927329"#input("Telemóvel? ")
         if re.search(
             "9[1236]\d{7}", 
             Telemovel
@@ -90,37 +103,37 @@ def Inserir():
             continue
 
     while True:
-        NIF = input("NIF? ")
-        if idValidNIF(NIF):
+        NIF = "287273962"#input("NIF? ")
+        if isValid.NIF(NIF):
             break
         else:
             continue
         
     while True:
-        NCC = input("Número de Cartão de Cidadão? ")
-        if isValidNCC(NCC) :
+        NCC = "15547701 3 ZV1"#input("Número de Cartão de Cidadão? ")
+        if isValid.NCC(NCC):
             break
         else:
             continue
 
     while True :
-        DataAdmissao = input("Data de Admissão? ")
-        if isDataAnterior(DataAdmissao) == '0' :
+        DataAdmissao = input("Data de Admissão %Y-%m-%d %h %m %s? ")
+        if isValid.DATE :
             break
         else:
             continue
 
     while True:
-        Vencimento = input("Vencimento? ")
+        Vencimento = "12.5"#input("Vencimento? ")
         if re.search(
-            "[0-9]\d{8},[0-9]\d{2}", 
+            "([0-9])\d{,7}\.([0-9])\d{,1}", 
             Vencimento
             ) :
             break
         else:
             continue
 
-    f = open(nomeficheiro, "at")
+    f = open(FileName, "at")
     print(
         ID,
         Cd,
@@ -141,11 +154,6 @@ def Inserir():
     f.close()
     print("Funcionário foi inserido com sucesso!")
 
-def isValidNCC(str):
-    return True
-
-def idValidNIF(num):
-    return True
 
 def isDataAnterior(data_texto):
     dataAtual = datetime.date.today()
@@ -195,4 +203,4 @@ def GerarOrganograma():
     return True
 
 #Be the last one!
-gestao()
+menu()
