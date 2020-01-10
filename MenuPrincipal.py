@@ -59,7 +59,7 @@ def ExportarServicosTodosHTML ():
         print("</tr>", file=f)
 	print("</table>", file=f)
 	f.close()
-	os.exec("ServicosTodos.html");
+	os.exec("ServicosTodos.html")
 
 
 def PesquisaServicosNome ():
@@ -128,5 +128,5 @@ def MenuPrincipal():
             print (op)
             # GestaoPaises()
         elif op == 0:
-            break;
+            break
 MenuPrincipal()
