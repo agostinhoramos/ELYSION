@@ -1,6 +1,7 @@
 import re
 import os
 import string
+import urllib
 from datetime import datetime
 from os import path
 
@@ -129,6 +130,13 @@ class isValid:
             return '-1'
 
         return boo
+    def IDC(str):
+        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str) :
+            link = "https://cloud.sysnovare.pt/ipg/unidades_geral.lista_nivel?p_nivel_id="+str
+            f = urllib.urlopen(link)
+            myfile = f.read()
+        else:
+            return '-1'
 
     def INT(str):
         try:

@@ -4,8 +4,8 @@ from Fn import isValid
 from Fn import inFile
 from Fn import Algrthm
 
-class GS:
-    def Inserir(_url_ = 'Dados/Servicos.csv'):
+class GC:
+    def Inserir(_url_ = 'Dados/Categorias.csv'):
         return True
 
     def Pesquisar():

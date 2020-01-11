@@ -6,14 +6,8 @@ from Fn import Algrthm
 
 class GF:
 
-    def Inserir():
-        _url_ = 'Dados/Funcionarios.csv'
-        CDF = Algrthm.CDF(_url_)
-        IDCategoria = 0  # input("ID Categoria? ")
-        IDTitulo = 0  # input("ID Título? ")
-        IDServico = 0  # input("ID Serviço? ")
-        IDChefe = 0  # input("ID Funcionário Chefe? ")
-
+    def Inserir(_url_ = 'Dados/Funcionarios.csv'):
+        
         while True:
             IDF = input("IDFuncionário? ")
             RSLT = isValid.IDF(IDF, _url_)
@@ -25,13 +19,43 @@ class GF:
                 elif RSLT == '-2':
                     print('>>> Já existe Funcionário com este número! <<<\n')
                 continue
+        
+        CDF = Algrthm.CDF(_url_) #Gerado Automaticamente!
 
         while True:
-            Nm = input("Nome Completo do Funcionário? ")
-            if re.search("^[A-Z][a-zA-Z]{3,}(?: [A-Z][a-zA-Z]*){0,4}$", Nm ) :
+            NAME = input("Nome Completo do Funcionário? ")
+            if re.search("^[A-Z][a-zA-Z]{3,}(?: [A-Z][a-zA-Z]*){0,4}$", NAME ) :
                 break
             else:
                 print(">>> Nome inválido!, [2-5] Palavras <<<\n")
+                continue
+        
+        while True:
+            IDC = input("ID Categoria? ")
+            if True:
+                break
+            else:
+                continue
+
+        while True:
+            IDT = input("ID Título? ")
+            if True:
+                break
+            else:
+                continue
+
+        while True:
+            IDS = input("ID Serviço? ")
+            if True:
+                break
+            else:
+                continue
+
+        while True:
+            IDFC = input("ID Funcionário chefe? ")
+            if True:
+                break
+            else:
                 continue
 
         while True :
@@ -44,7 +68,7 @@ class GF:
 
         while True:
             Telemovel = input("Telemóvel? ")
-            if re.search( "9[1236]\d{7}", Telemovel) :
+            if re.search( "(9[1236]\d{7})+$", Telemovel) :
                 break
             else:
                 print(">>> Telemóvel não é válido, Prefixo 91, 92, 93, 96! <<<\n")
@@ -99,11 +123,11 @@ class GF:
         print(
             IDF,
             CDF,
-            Nm,
-            IDCategoria,
-            IDTitulo,
-            IDServico,
-            IDChefe,
+            NAME,
+            IDC,
+            IDT,
+            IDS,
+            IDFC,
             Email,
             Telemovel,
             NIF,
