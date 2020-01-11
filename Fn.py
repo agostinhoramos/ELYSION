@@ -1,15 +1,22 @@
+import re
+import os
 import string
+from datetime import datetime
+from os import path
 
 class isValid:
 
     def NIF(nif):
+        # verificar se é apenas inteiro
+        if not isValid.INT(nif) :
+            return '-1'
         # verificar tamanho do número passado
         if len(nif) != 9:
-            return False
+            return '-1'
 
         # verificar validade do carácter inicial do NIF
         if nif[0] not in "125689":
-            return False
+            return '-1'
 
         numstr = nif
         acceptX=0
@@ -28,7 +35,12 @@ class isValid:
         for pos, dig in enumerate(num[:-1]):
             sum += dig * (9 - pos)
         
-        return (sum % 11 and (11 - sum % 11) % 10) == num[-1]
+        if (sum % 11 and (11 - sum % 11) % 10) == num[-1]:
+            rslt = 'True'
+        else:
+            rslt = '-2'
+
+        return rslt
     
     def NCC(str):
         str = str.replace(" ", "")
@@ -37,7 +49,7 @@ class isValid:
         secondDigit = 0
         
         if len(str) != 12:
-            return 0
+            return '-1'
 
         for i in range(len(str) - 1, -1, -1):
             valor = upperCaseStr[i]
@@ -89,15 +101,76 @@ class isValid:
             secondDigit = 1 if secondDigit == 0 else 0
         
             if (sum % 10) == 0 :
-                result = True
+                result = 'True'
             else:
-                result = False
+                result = '-2'
             
         return result
 
     def DATE(date):
-        return True
+        
+        try:
+            LastTime = datetime.strptime(date,"%Y %m %d %H %M %S")
+        except ValueError:
+            return '-1'
+
+        if datetime.timestamp(LastTime) <= datetime.timestamp( datetime.now() ):
+            return 'True'
+        else:
+            return '-2'
+
+    def IDF(str,url):
+        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str):
+            if inFile.exist(str,0,url) :
+                boo = '-2'
+            else:
+                boo = 'True'
+        else:
+            return '-1'
+
+        return boo
+
+    def INT(str):
+        try:
+            int(str)
+            return True
+        except ValueError:
+            return False
+
+
 
 class inFile:
     def NextLine(url):
-        return sum(1 for line in open(url)) + 1
+        if path.exists(url):
+            n = sum(1 for line in open(url))
+        else:
+            n = 0
+
+        return n + 1
+
+    def exist(data,pos,url,sep=";"):
+        with open(url) as fp:
+            line = fp.readline()
+            boo = False
+            while line:
+                if line.split(sep)[pos] == data:
+                    boo = True
+                line = fp.readline()
+            return boo
+
+class Algrthm:
+    def CDF(url):
+        CAT = ''
+        char = ["A","B","C","D","E","F","G",
+                "H","I","J","K","L","M","N",
+                "O","P","Q","R","S","T","U",
+                "V","W","X","Y","Z"]
+        ln = inFile.NextLine(url)
+        i = 0
+        while ln != 0:
+            tmp = (ln % 26)-1
+            CAT = CAT + char[tmp]
+            i = i + 1
+            ln = int(ln/26)
+
+        return CAT
