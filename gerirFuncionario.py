@@ -9,9 +9,10 @@ from Fn import inFile
 from Fn import _f
 
 class GF:
-    
-    def Inserir(_url_ = 'Dados/Funcionarios.csv'):
-        _L = json.loads(inFile.read('lang/en-us.json'))
+    def Inserir(urlLang):
+        _url_ = 'Dados/Funcionarios.csv'
+        _L = json.loads(inFile.read(urlLang))
+
         while True:
             IDF = input(_L['attr'][0]+"? ")
             RSLT = isValid.IDF(IDF, _url_)
@@ -103,7 +104,7 @@ class GF:
             if re.search("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", Email) :
                 break
             else:
-                print(">>> Este "+_L['attr'][7]+" "+_L['invalid']+"! <<<\n")
+                print(">>> "+(_L['this'][0])+" "+_L['attr'][7]+" "+_L['invalid']+"! <<<\n")
                 continue
 
         while True:
@@ -181,7 +182,7 @@ class GF:
         print("*** "+(_L['menu'][0])+" "+_L['was-insert-sucess']+"! ***")
 
     def Pesquisar(_url_ = 'Dados/Funcionarios.csv'):
-        attr = json.loads(inFile.read('lang/pt-pt.json'))['attr']
+        attr = _L['attr']
         c = 1
         print('\n')
         for name in attr :
@@ -225,26 +226,26 @@ class GF:
             
         return True
 
-    def Alterar():
+    def Alterar(urlLang):
         return True
 
-    def Eliminar():
+    def Eliminar(urlLang):
         return True
 
-    def PesquisarOrdenar():
+    def PesquisarOrdenar(urlLang):
         return True
 
-    def Contar():
+    def Contar(urlLang):
         return True
 
-    def Agrupar():
+    def Agrupar(urlLang):
         return True
 
-    def AgruparContar():
+    def AgruparContar(urlLang):
         return True
 
-    def Exportar():
+    def Exportar(urlLang):
         return True
 
-    def Organograma():
+    def Organograma(urlLang):
         return True

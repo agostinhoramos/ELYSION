@@ -12,7 +12,15 @@ from gerirCategoria import GC
 from gerirTitulo import GT
 
 def menu():
-    _L = json.loads(inFile.read('lang/en-us.json'))
+    while True:
+        opc = input("\n[ 1 - English | 2 - Portuguese ]? ")
+        if opc == '1':
+            urlLang = 'lang/en-us.json'
+            break
+        elif opc == '2':
+            urlLang = 'lang/pt-pt.json'
+            break
+    _L = json.loads(inFile.read(urlLang))
     opc = '0'
     while opc == '0':
         print('\n\t+++++ '+_L['main_menu']+' +++++\n')
@@ -34,25 +42,25 @@ def menu():
                     k = k + 1
                 x = input(_L['choose_option']+': ')
                 if x == '1':
-                    GF.Inserir()
+                    GF.Inserir(urlLang)
                 elif x == '2':
-                    GF.Pesquisar()
+                    GF.Pesquisar(urlLang)
                 elif x == '3':
-                    GF.Alterar()
+                    GF.Alterar(urlLang)
                 elif x == '4':
-                    GF.Eliminar()
+                    GF.Eliminar(urlLang)
                 elif x == '5':
-                    GF.PesquisarOrdenar()
+                    GF.PesquisarOrdenar(urlLang)
                 elif x == '6':
-                    GF.Contar()
+                    GF.Contar(urlLang)
                 elif x == '7':
-                    GF.Agrupar()
+                    GF.Agrupar(urlLang)
                 elif x == '8':
-                    GF.AgruparContar()
+                    GF.AgruparContar(urlLang)
                 elif x == '9':
-                    GF.Exportar()
+                    GF.Exportar(urlLang)
                 elif x == '10':
-                    GF.Organograma()
+                    GF.Organograma(urlLang)
                 elif x == '0':
                     opc = x
                 else:
@@ -81,25 +89,25 @@ def menu():
                     k = k + 1
                 x = input(_L['choose_option']+': ')
                 if x == '1':
-                    GS.Inserir()
+                    GS.Inserir(urlLang)
                 elif x == '2':
-                    GS.Pesquisar()
+                    GS.Pesquisar(urlLang)
                 elif x == '3':
-                    GS.Alterar()
+                    GS.Alterar(urlLang)
                 elif x == '4':
-                    GS.Eliminar()
+                    GS.Eliminar(urlLang)
                 elif x == '5':
-                    GS.PesquisarOrdenar()
+                    GS.PesquisarOrdenar(urlLang)
                 elif x == '6':
-                    GS.Contar()
+                    GS.Contar(urlLang)
                 elif x == '7':
-                    GS.Agrupar()
+                    GS.Agrupar(urlLang)
                 elif x == '8':
-                    GS.AgruparContar()
+                    GS.AgruparContar(urlLang)
                 elif x == '9':
-                    GS.Exportar()
+                    GS.Exportar(urlLang)
                 elif x == '10':
-                    GS.Organograma()
+                    GS.Organograma(urlLang)
                 elif x == '0':
                     opc = x
                 else:
@@ -128,25 +136,25 @@ def menu():
                     k = k + 1
                 x = input(_L['choose_option']+': ')
                 if x == '1':
-                    GS.Inserir()
+                    GS.Inserir(urlLang)
                 elif x == '2':
-                    GS.Pesquisar()
+                    GS.Pesquisar(urlLang)
                 elif x == '3':
-                    GS.Alterar()
+                    GS.Alterar(urlLang)
                 elif x == '4':
-                    GS.Eliminar()
+                    GS.Eliminar(urlLang)
                 elif x == '5':
-                    GS.PesquisarOrdenar()
+                    GS.PesquisarOrdenar(urlLang)
                 elif x == '6':
-                    GS.Contar()
+                    GS.Contar(urlLang)
                 elif x == '7':
-                    GS.Agrupar()
+                    GS.Agrupar(urlLang)
                 elif x == '8':
-                    GS.AgruparContar()
+                    GS.AgruparContar(urlLang)
                 elif x == '9':
-                    GS.Exportar()
+                    GS.Exportar(urlLang)
                 elif x == '10':
-                    GS.Organograma()
+                    GS.Organograma(urlLang)
                 elif x == '0':
                     opc = x
                 else:
@@ -175,25 +183,25 @@ def menu():
                     k = k + 1
                 x = input(_L['choose_option']+': ')
                 if x == '1':
-                    GS.Inserir()
+                    GS.Inserir(urlLang)
                 elif x == '2':
-                    GS.Pesquisar()
+                    GS.Pesquisar(urlLang)
                 elif x == '3':
-                    GS.Alterar()
+                    GS.Alterar(urlLang)
                 elif x == '4':
-                    GS.Eliminar()
+                    GS.Eliminar(urlLang)
                 elif x == '5':
-                    GS.PesquisarOrdenar()
+                    GS.PesquisarOrdenar(urlLang)
                 elif x == '6':
-                    GS.Contar()
+                    GS.Contar(urlLang)
                 elif x == '7':
-                    GS.Agrupar()
+                    GS.Agrupar(urlLang)
                 elif x == '8':
-                    GS.AgruparContar()
+                    GS.AgruparContar(urlLang)
                 elif x == '9':
-                    GS.Exportar()
+                    GS.Exportar(urlLang)
                 elif x == '10':
-                    GS.Organograma()
+                    GS.Organograma(urlLang)
                 elif x == '0':
                     opc = x
                 else:
