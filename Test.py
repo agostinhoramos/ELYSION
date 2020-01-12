@@ -3,5 +3,7 @@ from Fn import isValid
 from Fn import inFile
 import json
 
+_L = json.loads(inFile.read('lang/pt-pt.json'))
 
-print( json.loads(inFile.read('lang/pt-pt.json'))['attr'] )
+rd = "dsafdsaf %s fdgs" % ("Porra!")
+print( rd )

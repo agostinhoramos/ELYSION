@@ -12,27 +12,27 @@ from gerirCategoria import GC
 from gerirTitulo import GT
 
 def menu():
-    LANG = json.loads(inFile.read('lang/pt-pt.json'))
+    _L = json.loads(inFile.read('lang/en-us.json'))
     opc = '0'
     while opc == '0':
-        print('\n\t+++++ '+LANG['main_menu']+' +++++\n')
-        a = LANG['menu']
+        print('\n\t+++++ '+_L['main_menu']+' +++++\n')
+        a = _L['menu']
         k = 1
         for d in a:
             print(str(k) + ' - ' + d)
             k = k + 1
 
-        x = input(LANG['choose_option']+': ')
+        x = input(_L['choose_option']+': ')
         if x == '1':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ ' + (LANG['menu'][0]) + ' +++++')
-                a = LANG['opc']
+                print('\n\t+++++ ' + (_L['menu'][0]) + ' +++++')
+                a = _L['opc']
                 k = 0
                 for d in a:
                     print(str(k) + ' - ' + d)
                     k = k + 1
-                x = input(LANG['choose_option']+': ')
+                x = input(_L['choose_option']+': ')
                 if x == '1':
                     GF.Inserir()
                 elif x == '2':
@@ -56,13 +56,14 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> " + (LANG['invalid_option']) + "! <<<")
+                    print("\n>>> "+_L['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
+                        tmp = _L['want_continue'] % (_L['with']+' '+_L['menu'][0])
+                        opc = input("\n"+tmp+" (1 - "+_L['yes']+" "+_L['or']+" 0 - "+_L['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
+                            print('>>> (1 - '+_L['yes']+' '+_L['or']+' 0 - '+_L['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -72,13 +73,13 @@ def menu():
         elif x == '2':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ ' + (LANG['menu'][1]) + ' +++++')
-                a = LANG['opc']
+                print('\n\t+++++ ' + (_L['menu'][1]) + ' +++++')
+                a = _L['opc']
                 k = 0
                 for d in a:
                     print(str(k) + ' - ' + d)
                     k = k + 1
-                x = input(LANG['choose_option']+': ')
+                x = input(_L['choose_option']+': ')
                 if x == '1':
                     GS.Inserir()
                 elif x == '2':
@@ -102,13 +103,14 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> "+LANG['invalid_option']+"! <<<")
+                    print("\n>>> "+_L['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
+                        tmp = _L['want_continue'] % (_L['with']+' '+_L['menu'][1])
+                        opc = input("\n"+tmp+" (1 - "+_L['yes']+" "+_L['or']+" 0 - "+_L['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
+                            print('>>> (1 - '+_L['yes']+' '+_L['or']+' 0 - '+_L['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -118,13 +120,13 @@ def menu():
         elif x == '3':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ ' + (LANG['menu'][2]) + ' +++++')
-                a =  LANG['opc']
+                print('\n\t+++++ ' + (_L['menu'][2]) + ' +++++')
+                a =  _L['opc']
                 k = 0
                 for d in a:
                     print(str(k) + ' - ' + d)
                     k = k + 1
-                x = input(LANG['choose_option']+': ')
+                x = input(_L['choose_option']+': ')
                 if x == '1':
                     GS.Inserir()
                 elif x == '2':
@@ -148,13 +150,14 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> "+LANG['invalid_option']+"! <<<")
+                    print("\n>>> "+_L['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['yes']+")? ")
+                        tmp = _L['want_continue'] % (_L['with']+' '+_L['menu'][2])
+                        opc = input("\n"+tmp+" (1 - "+_L['yes']+" "+_L['or']+" 0 - "+_L['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
+                            print('>>> (1 - '+_L['yes']+' '+_L['or']+' 0 - '+_L['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -164,13 +167,13 @@ def menu():
         elif x == '4':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ ' + (LANG['menu'][3]) + ' +++++')
-                a =  LANG['opc']
+                print('\n\t+++++ ' + (_L['menu'][3]) + ' +++++')
+                a =  _L['opc']
                 k = 0
                 for d in a:
                     print(str(k) + ' - ' + d)
                     k = k + 1
-                x = input(LANG['choose_option']+': ')
+                x = input(_L['choose_option']+': ')
                 if x == '1':
                     GS.Inserir()
                 elif x == '2':
@@ -194,13 +197,14 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> "+LANG['invalid_option']+"! <<<")
+                    print("\n>>> "+_L['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
+                        tmp = _L['want_continue'] % (_L['with']+' '+_L['menu'][3])
+                        opc = input("\n"+tmp+" (1 - "+_L['yes']+" "+_L['or']+" 0 - "+_L['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
+                            print('>>> (1 - '+_L['yes']+' '+_L['or']+' 0 - '+_L['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -210,9 +214,10 @@ def menu():
 
         if opc == '0':
             while True:
-                opc = input("\n"+LANG['want_exit']+"(1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
+                tmp = _L['want_exit'] % (_L['from']+' '+_L['mn'])
+                opc = input("\n"+tmp+"(1 - "+_L['yes']+" "+_L['or']+" 0 - "+_L['no']+")? ")
                 if not (opc == '1' or opc == '0'):
-                    print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
+                    print('>>> (1 - '+_L['yes']+' '+_L['or']+' 0 - '+_L['no']+')? <<<\n')
                     continue
                 else:
                     print("\n")
