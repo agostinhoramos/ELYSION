@@ -1,5 +1,8 @@
 import re
 
+import os.path
+from os import path
+
 from Fn import isValid
 from Fn import inFile
 from Fn import Algrthm
@@ -32,30 +35,55 @@ class GF:
         
         while True:
             IDC = input("ID Categoria? ")
-            if True:
+            RSLT = isValid.IDC(IDC)
+            if RSLT == 'True':
                 break
             else:
+                if RSLT == '-1':
+                    print('\n>>> Código inválido!, [inteiro ate 4 digitos] <<<')
+                elif RSLT == '-2':
+                    print('\n>>> A categoria introduzida não existe! <<<')
                 continue
 
         while True:
             IDT = input("ID Título? ")
-            if True:
+            RSLT = isValid.IDT(IDT)
+            if RSLT == 'True':
                 break
             else:
+                if RSLT == '-1':
+                    print('\n>>> Código inválido!, [inteiro ate 4 digitos] <<<')
+                elif RSLT == '-2':
+                    print('\n>>> O título introduzido não existe! <<<')
                 continue
 
         while True:
             IDS = input("ID Serviço? ")
-            if True:
+            RSLT = isValid.IDS(IDS)
+            if RSLT == 'True':
                 break
             else:
+                if RSLT == '-1':
+                    print('\n>>> Código inválido!, [inteiro ate 4 digitos] <<<')
+                elif RSLT == '-2':
+                    print('\n>>> O serviço introduzido não existe! <<<')
                 continue
 
         while True:
-            IDFC = input("ID Funcionário chefe? ")
-            if True:
+            if path.exists(_url_):
+                IDFC = input("ID Funcionário chefe? ")
+            else:
+                print("ID Funcionário chefe? "+IDF)
+                IDFC = IDF
+                break
+            RSLT = isValid.IDFC(IDFC)
+            if RSLT == 'True':
                 break
             else:
+                if RSLT == '-1':
+                    print('\n>>> Código inválido!, [inteiro ate 8 digitos] <<<')
+                elif RSLT == '-2':
+                    print('\n>>> O "ID Funcionário chefe" introduzido não existe! <<<')
                 continue
 
         while True :
@@ -140,7 +168,6 @@ class GF:
         f.close()
         print("*** Funcionário foi inserido com sucesso! ***")
 
-    # Others Importants Functions
     def Pesquisar():
         return True
 

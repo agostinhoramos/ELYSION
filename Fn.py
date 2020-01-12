@@ -3,6 +3,7 @@ import os
 import string
 import urllib
 from datetime import datetime
+import os.path
 from os import path
 
 class isValid:
@@ -120,7 +121,7 @@ class isValid:
         else:
             return '-2'
 
-    def IDF(str,url):
+    def IDF(str, url = 'Dados/Funcionarios.csv'):
         if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str):
             if inFile.exist(str,0,url) :
                 boo = '-2'
@@ -130,13 +131,50 @@ class isValid:
             return '-1'
 
         return boo
-    def IDC(str):
-        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str) :
-            link = "https://cloud.sysnovare.pt/ipg/unidades_geral.lista_nivel?p_nivel_id="+str
-            f = urllib.urlopen(link)
-            myfile = f.read()
+
+    def IDC(str, url = 'Dados/Categorias.csv'):
+        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str):
+            if inFile.exist(str,0,url,' ') :
+                boo = 'True'
+            else:
+                boo = '-2'
         else:
             return '-1'
+        
+        return boo
+    
+    def IDT(str, url = 'Dados/Titulos.csv'):
+        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str):
+            if inFile.exist(str,0,url,'.') :
+                boo = 'True'
+            else:
+                boo = '-2'
+        else:
+            return '-1'
+        
+        return boo
+    
+    def IDS(str, url = 'Dados/Servicos.csv'):
+        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str):
+            if inFile.isset(str,0,url) :
+                boo = 'True'
+            else:
+                boo = '-2'
+        else:
+            return '-1'
+        
+        return boo
+    
+    def IDFC(str, url = 'Dados/Funcionarios.csv'):
+        if re.search("(^[1-9]\d{0}[0-9]{,7})+$", str):
+            if inFile.exist(str,0,url) :
+                boo = 'True'
+            else:
+                boo = '-2'
+        else:
+            return '-1'
+
+        return boo
 
     def INT(str):
         try:
@@ -157,6 +195,9 @@ class inFile:
         return n + 1
 
     def exist(data,pos,url,sep=";"):
+        if not path.exists(url):
+            return False
+
         with open(url) as fp:
             line = fp.readline()
             boo = False
@@ -165,6 +206,22 @@ class inFile:
                     boo = True
                 line = fp.readline()
             return boo
+    
+    def isset(data, pos, url = ''):
+        f = open(url, "r", encoding="utf-8")
+        str = f.read()
+        boo = False
+        num = len(str.split("("))-1
+        #try open array
+        str = str.split("]")[0].split("[")[1]
+        #try do step by step
+        while num > 0:
+            num = num - 1
+            slc = str.split(")")[num].split("(")[1]
+            if slc.split(".")[pos].replace('"','') == data:
+                boo = True
+        return boo
+
 
 class Algrthm:
     def CDF(url):
