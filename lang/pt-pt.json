@@ -1,0 +1,46 @@
+{
+    "or":"ou",
+    "yes":"Sim",
+    "no":"Não",
+    "main_menu":"Menu Principal",
+    "choose_option":"Escolha uma das opções",
+    "invalid_option":"Esta opção é inválida",
+    "want_continue":"Deseja continuar",
+    "want_exit":"Deseja sair",
+    "invalid_name":"Nome inválido",
+    "words":"Palavras",
+    "menu":[
+        "Funcionário",
+        "Serviço",
+        "Categoria",
+        "Título"
+    ],
+    "opc": [
+        "Sair",
+        "Inserir",
+        "Pesquisar",
+        "Alterar",
+        "Eliminar",
+        "Pesquisar & Ordenar",
+        "Contar",
+        "Agrupar",
+        "Agrupar & Contar",
+        "Exportar",
+        "Gerar Organograma"
+    ],
+    "attr": [
+        "ID Funcionário",
+        "Codigo De Funcionário",
+        "Nome Funcionário",
+        "ID Categoria",
+        "ID Título",
+        "ID Serviço",
+        "ID Chefe",
+        "Email",
+        "Telemóvel",
+        "NIF",
+        "Numero Cartão Cidadão",
+        "Data Admissao",
+        "Vencimento"
+    ]
+}

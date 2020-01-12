@@ -3,37 +3,36 @@
 Agostinho de Pina Ramos - 1012444
 Erickson Rompão - 1702282
 '''
+import json
+from Fn import inFile
+
 from gerirFuncionario import GF
 from gerirServico import GS
 from gerirCategoria import GC
 from gerirTitulo import GT
 
 def menu():
+    LANG = json.loads(inFile.read('lang/pt-pt.json'))
     opc = '0'
     while opc == '0':
-        print('\n\t+++++ Menu Principal +++++\n')
-        print('1 - Funcionário')
-        print('2 - Serviço')
-        print('3 - Categoria')
-        print('4 - Título')
+        print('\n\t+++++ '+LANG['main_menu']+' +++++\n')
+        a = LANG['menu']
+        k = 1
+        for d in a:
+            print(str(k) + ' - ' + d)
+            k = k + 1
 
-        x = input('Escolha uma das opções: ')
+        x = input(LANG['choose_option']+': ')
         if x == '1':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ Funcionário +++++')
-                print("1 - Inserir")
-                print("2 - Pesquisar")
-                print("3 - Alterar")
-                print("4 - Eliminar")
-                print("5 - Pesqusar e Ordenar")
-                print("6 - Contar")
-                print("7 - Agrupar")
-                print("8 - Agrupar e Contar")
-                print("9 - Exportar")
-                print("10 - Gerar Organogramas")
-                print("0 - Sair")
-                x = input('Escolha uma das opções: ')
+                print('\n\t+++++ ' + (LANG['menu'][0]) + ' +++++')
+                a = LANG['opc']
+                k = 0
+                for d in a:
+                    print(str(k) + ' - ' + d)
+                    k = k + 1
+                x = input(LANG['choose_option']+': ')
                 if x == '1':
                     GF.Inserir()
                 elif x == '2':
@@ -57,13 +56,13 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> Esta opção é inválida! <<<")
+                    print("\n>>> " + (LANG['invalid_option']) + "! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\nDeseja continuar (1 - Sim ou 0 - Não)? ")
+                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - Sim ou 0 - Não)? <<<\n')
+                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -73,19 +72,13 @@ def menu():
         elif x == '2':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ Serviço +++++')
-                print("1 - Inserir")
-                print("2 - Pesquisar")
-                print("3 - Alterar")
-                print("4 - Eliminar")
-                print("5 - Pesqusar e Ordenar")
-                print("6 - Contar")
-                print("7 - Agrupar")
-                print("8 - Agrupar e Contar")
-                print("9 - Exportar")
-                print("10 - Gerar Organogramas")
-                print("0 - Sair")
-                x = input('Escolha uma das opções: ')
+                print('\n\t+++++ ' + (LANG['menu'][1]) + ' +++++')
+                a = LANG['opc']
+                k = 0
+                for d in a:
+                    print(str(k) + ' - ' + d)
+                    k = k + 1
+                x = input(LANG['choose_option']+': ')
                 if x == '1':
                     GS.Inserir()
                 elif x == '2':
@@ -109,13 +102,13 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> Esta opção é inválida! <<<")
+                    print("\n>>> "+LANG['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\nDeseja continuar (1 - Sim ou 0 - Não)? ")
+                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - Sim ou 0 - Não)? <<<\n')
+                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -125,19 +118,13 @@ def menu():
         elif x == '3':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ Categoria +++++')
-                print("1 - Inserir")
-                print("2 - Pesquisar")
-                print("3 - Alterar")
-                print("4 - Eliminar")
-                print("5 - Pesqusar e Ordenar")
-                print("6 - Contar")
-                print("7 - Agrupar")
-                print("8 - Agrupar e Contar")
-                print("9 - Exportar")
-                print("10 - Gerar Organogramas")
-                print("0 - Sair")
-                x = input('Escolha uma das opções: ')
+                print('\n\t+++++ ' + (LANG['menu'][2]) + ' +++++')
+                a =  LANG['opc']
+                k = 0
+                for d in a:
+                    print(str(k) + ' - ' + d)
+                    k = k + 1
+                x = input(LANG['choose_option']+': ')
                 if x == '1':
                     GS.Inserir()
                 elif x == '2':
@@ -161,13 +148,13 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> Esta opção é inválida! <<<")
+                    print("\n>>> "+LANG['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\nDeseja continuar (1 - Sim ou 0 - Não)? ")
+                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['yes']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - Sim ou 0 - Não)? <<<\n')
+                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -177,19 +164,13 @@ def menu():
         elif x == '4':          # main menu <<<-------
             opc = '1'
             while opc == '1' :
-                print('\n\t+++++ Título +++++')
-                print("1 - Inserir")
-                print("2 - Pesquisar")
-                print("3 - Alterar")
-                print("4 - Eliminar")
-                print("5 - Pesqusar e Ordenar")
-                print("6 - Contar")
-                print("7 - Agrupar")
-                print("8 - Agrupar e Contar")
-                print("9 - Exportar")
-                print("10 - Gerar Organogramas")
-                print("0 - Sair")
-                x = input('Escolha uma das opções: ')
+                print('\n\t+++++ ' + (LANG['menu'][3]) + ' +++++')
+                a =  LANG['opc']
+                k = 0
+                for d in a:
+                    print(str(k) + ' - ' + d)
+                    k = k + 1
+                x = input(LANG['choose_option']+': ')
                 if x == '1':
                     GS.Inserir()
                 elif x == '2':
@@ -213,13 +194,13 @@ def menu():
                 elif x == '0':
                     opc = x
                 else:
-                    print("\n>>> Esta opção é inválida! <<<")
+                    print("\n>>> "+LANG['invalid_option']+"! <<<")
                 
                 if opc == '1':
                     while True:
-                        opc = input("\nDeseja continuar (1 - Sim ou 0 - Não)? ")
+                        opc = input("\n"+LANG['want_continue']+" (1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
                         if not (opc == '1' or opc == '0'):
-                            print('>>> (1 - Sim ou 0 - Não)? <<<\n')
+                            print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
                             continue
                         else:
                             print("\n")
@@ -229,9 +210,9 @@ def menu():
 
         if opc == '0':
             while True:
-                opc = input("\nDeseja sair (1 - Sim ou 0 - Não)? ")
+                opc = input("\n"+LANG['want_exit']+"(1 - "+LANG['yes']+" "+LANG['or']+" 0 - "+LANG['no']+")? ")
                 if not (opc == '1' or opc == '0'):
-                    print('>>> (1 - Sim ou 0 - Não)? <<<\n')
+                    print('>>> (1 - '+LANG['yes']+' '+LANG['or']+' 0 - '+LANG['no']+')? <<<\n')
                     continue
                 else:
                     print("\n")

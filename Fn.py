@@ -2,6 +2,7 @@ import re
 import os
 import string
 import urllib
+import json
 from datetime import datetime
 import os.path
 from os import path
@@ -207,6 +208,28 @@ class inFile:
                 line = fp.readline()
             return boo
     
+    def line(pos,url):
+        if not path.exists(url):
+            return False
+        f = open(url, "r", encoding="utf-8")
+        str = f.read()
+        f.close()
+        arr = str.split('\n')
+        ln = len(arr)-1
+        pos = int(pos)
+        if pos > ln:
+            pos = ln
+        elif pos < 0:
+            pos = 0
+        return arr[pos]
+
+    def read(url):
+        if not path.exists(url):
+            return ''
+        f = open(url, "r", encoding="utf-8")
+        str = f.read()
+        return str
+
     def isset(data, pos, url = ''):
         f = open(url, "r", encoding="utf-8")
         str = f.read()
@@ -223,19 +246,24 @@ class inFile:
         return boo
 
 
-class Algrthm:
-    def CDF(url):
+class _f:
+    def intToChar(num, start0 = False):
         CAT = ''
-        char = ["A","B","C","D","E","F","G",
-                "H","I","J","K","L","M","N",
-                "O","P","Q","R","S","T","U",
-                "V","W","X","Y","Z"]
-        ln = inFile.NextLine(url)
+        c = ["A","B","C","D","E","F","G",
+            "H","I","J","K","L","M","N",
+            "O","P","Q","R","S","T","U",
+            "V","W","X","Y","Z"]
         i = 0
-        while ln != 0:
-            tmp = (ln % 26)-1
-            CAT = CAT + char[tmp]
-            i = i + 1
-            ln = int(ln/26)
-
+        num = int(num) #make sure that is int
+        sval = 1
+        if num > 0:
+            if start0:
+                sval = 0
+            while num != 0:
+                tmp = (num % len(c))-sval
+                CAT = CAT + c[tmp]
+                i = i + 1
+                num = int(num/len(c))
+        else:
+            return c[0]
         return CAT

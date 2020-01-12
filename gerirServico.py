@@ -2,7 +2,7 @@ import re
 
 from Fn import isValid
 from Fn import inFile
-from Fn import Algrthm
+from Fn import _f
 
 class GS:
     def Inserir(_url_ = 'Dados/Servicos.csv'):

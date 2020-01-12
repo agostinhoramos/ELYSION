@@ -1,11 +1,12 @@
 import re
 
+import json
 import os.path
 from os import path
 
 from Fn import isValid
 from Fn import inFile
-from Fn import Algrthm
+from Fn import _f
 
 class GF:
 
@@ -23,7 +24,7 @@ class GF:
                     print('>>> Já existe Funcionário com este número! <<<\n')
                 continue
         
-        CDF = Algrthm.CDF(_url_) #Gerado Automaticamente!
+        CDF = _f.intToChar( inFile.NextLine(_url_) ) #Gerado Automaticamente!
 
         while True:
             NAME = input("Nome Completo do Funcionário? ")
@@ -168,7 +169,48 @@ class GF:
         f.close()
         print("*** Funcionário foi inserido com sucesso! ***")
 
-    def Pesquisar():
+    def Pesquisar(_url_ = 'Dados/Funcionarios.csv'):
+        attr = json.loads(inFile.read('lang/pt-pt.json'))['attr']
+        c = 1
+        print('\n')
+        for name in attr :
+            print("\t"+ str(c) + " - " + name)
+            c = c + 1
+        n = input("\nSelecione a opção de Pesquisa? ")
+        if not isValid.INT(n):
+            n = 0
+        while True:
+            n = int(n)
+            if n >= 0 and n <= c:
+                break
+            else:
+                print('>>> Opção incorreta! <<<')
+                if n == 0:
+                    continue
+                else:
+                    break
+
+        if n > 0 and n <= c:
+            q = input("\n" + attr[n-1] + ' a pesquisar? ')
+            k = 0
+            pos = -1
+            while k == 0 or len(s) > 0:
+                s = inFile.line(k,_url_)
+                if len(s) > 0:
+                    if s.split(";")[int(n)-1] == q:
+                        pos = k
+                        break
+                k = k + 1
+
+            if pos >= 0:
+                a = inFile.line(pos,_url_).split(";")
+                print(
+                        "\n[ %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s ]" % 
+                        (a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[12])
+                    )
+            else:
+                print('\n>>> ' + attr[n-1] + ' não encontramos! <<<')
+            
         return True
 
     def Alterar():

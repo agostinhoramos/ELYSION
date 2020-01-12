@@ -1,6 +1,7 @@
-from Fn import Algrthm
+from Fn import _f
 from Fn import isValid
 from Fn import inFile
+import json
 
 
-print( isValid.IDS('1') )
+print( json.loads(inFile.read('lang/pt-pt.json'))['attr'] )
