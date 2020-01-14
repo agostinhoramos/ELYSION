@@ -1,9 +1,12 @@
 import re
 
 import json
+import array
+from array import array
 import os.path
 from os import path
-
+import webbrowser
+import os
 from Fn import isValid
 from Fn import inFile
 from Fn import _f
@@ -181,12 +184,14 @@ class GF:
         f.close()
         print("*** "+(_L['menu'][0])+" "+_L['was-insert-sucess']+"! ***")
 
-    def Pesquisar(_url_ = 'Dados/Funcionarios.csv'):
+    def Pesquisar(urlLang):
+        _url_ = 'Dados/Funcionarios.csv'
+        _L = json.loads(inFile.read(urlLang))
         attr = _L['attr']
         c = 1
         print('\n')
         for name in attr :
-            print("\t"+ str(c) + " - " + name)
+            print(str(c) + " - " + name)
             c = c + 1
             tmp = _L['select-the-opction-of']+' '+(_L['opc'][2])
         n = input("\n"+tmp+"? ")
@@ -206,20 +211,25 @@ class GF:
         if n > 0 and n <= c:
             q = input("\n" + attr[n-1]+' '+(_L['to'][1])+' '+(_L['opc'][2])+'? ')
             k = 0
-            pos = -1
+            arr = []
             while k == 0 or len(s) > 0:
                 s = inFile.line(k,_url_)
                 if len(s) > 0:
-                    if s.split(";")[int(n)-1] == q:
-                        pos = k
-                        break
+                    qA = (s.split(";")[n-1]).lower()
+                    qB = q.lower()
+                    if qA.find(qB) > -1 :
+                        arr.append(k)
                 k = k + 1
 
-            if pos >= 0:
-                a = inFile.line(pos,_url_).split(";")
-                print(
-                        "\n[ %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s ]" % 
-                        (a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7], a[8], a[9], a[10], a[11], a[12])
+            if len(arr) > 0:
+                for x in arr:
+                    a = inFile.line(x,_url_)
+                    a = a.split(";")
+                    s = 20
+                    print(
+                        "%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s" % 
+                        (a[0][:s],a[1][:s],a[2][:s],a[3][:s],a[4][:s],a[5][:s],a[6][:s], 
+                        a[7][:s],a[8][:s],a[9][:s],a[10][:s],a[11][:s],a[12][:s])
                     )
             else:
                 print('\n>>> ' + attr[n-1] + ' '+_L['no_found']+'! <<<')
@@ -227,25 +237,264 @@ class GF:
         return True
 
     def Alterar(urlLang):
+        _url_ = 'Dados/Funcionarios.csv'
+        _L = json.loads(inFile.read(urlLang))
+        attr = _L['attr']
+
+        print('\n')
+        f = open(_url_, "r", encoding='utf-8')
+        k = 0
+        while True :
+            row = f.readline()
+            if len(row) > 0:
+                if k % 3 == 0:
+                    a = attr
+                    s = 8
+                    print(
+                        "[%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s]\n" % 
+                        (a[0][:s],a[1][:s],a[2][:s],a[3][:s],a[4][:s],a[5][:s],a[6][:s], 
+                        a[7][:s],a[8][:s],a[9][:s],a[10][:s],a[11][:s],a[12][:s])
+                    )
+                a = row.split(';')
+                s = 13
+                print(
+                    "%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s" % 
+                    (a[0][:s],a[1][:s],a[2][:s],a[3][:s],a[4][:s],a[5][:s],a[6][:s], 
+                    a[7][:s],a[8][:s],a[9][:s],a[10][:s],a[11][:s],a[12][:s])
+                )
+                k = k + 1
+            else:
+                break
+
+        while True:
+            m = input('\nID Funcionario a alterar? ')
+            RSLT = isValid.IDF(m, _url_)
+            if RSLT == '-2':
+                break
+            else:
+                if RSLT == 'True':
+                    print('>>> O ID do Funcionário não existe! <<<')
+                if RSLT == '-1':
+                    print('>>> Caracteres Inválidos! <<<')
+        print('\n')
+        arr = []
+        k = 1
+        for x in attr:
+            tmp = input(str(k)+' - '+x+'? ')
+            if len(tmp) > 0:
+                arr.append(tmp)
+                k = k + 1
+            else:
+                arr.append('')
+
+        inFile.update(m,arr,_url_)
+        print('Alterado com sucesso!')
+
         return True
 
     def Eliminar(urlLang):
+        _url_ = 'Dados/Funcionarios.csv'
+        _L = json.loads(inFile.read(urlLang))
+        attr = _L['attr']
+
+        print('\n')
+        f = open(_url_, "r", encoding='utf-8')
+        k = 1
+        while True :
+            r = -1
+            s = 15
+            row = f.readline()
+            if len(row) > 0:
+                a = row.split(';')
+                w = (a[0][:s],a[1][:s],a[2][:s],a[3][:s],a[4][:s],a[5][:s],a[6][:s],a[7][:s],a[8][:s],a[9][:s],a[10][:s],a[11][:s],a[12][:s])
+                l = len(input( str(k) + " - %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s Selecionar ? " % w ))
+                if l > 0:
+                    while True:
+                        r = input("\n\n>>> %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s\bDeseja apagar ( 1 - Sim | 0 - Não )? " % w)
+                        if r=='1' or r=='0':
+                            if r == '1':
+                                inFile.export(a) # exportar os dados apagados!
+                                inFile.delete(a[0],_url_)
+                                print('>>> Apagado com sucesso! <<<')
+                            print('\n')
+                            break
+                k = k + 1
+            else:
+                break
+
         return True
 
     def PesquisarOrdenar(urlLang):
+        _url_ = 'Dados/Funcionarios.csv'
+        _L = json.loads(inFile.read(urlLang))
+        attr = _L['attr']
+        c = 1
+        print('\n')
+        for name in attr :
+            print(str(c) + " - " + name)
+            c = c + 1
+        n = input("\nOrdenar Por? ")
+        if not isValid.INT(n):
+            n = 0
+        while True:
+            n = int(n)
+            if n >= 0 and n <= c:
+                break
+            else:
+                print('>>> '+_L['option'] + ' ' +_L['invalid']+'! <<<')
+                if n == 0:
+                    continue
+                else:
+                    break
+
+        if n > 0 and n <= c:
+            p = 0
+            arr = []
+            while True:
+                data = inFile.line(p,_url_)
+                d = data.split(';')
+                p = p + 1
+                try:
+                    val = d[n-1]
+                    tid = str(p)
+                    arr.append({val:tid})
+                except:
+                    print('')
+
+                if len(data) < 1 :
+                    break
+
+            arr.sort()
+
+            for x in arr:
+                n = int(x.split(';')[1])
+                rows = inFile.line(n,_url_)
+                s = 20
+                if len(rows) > 0:
+                    a = rows.split(';')
+                    w = (a[0][:s],a[1][:s],a[2][:s],a[3][:s],a[4][:s],a[5][:s],a[6][:s],a[7][:s],a[8][:s],a[9][:s],a[10][:s],a[11][:s],a[12][:s])
+                    print("%s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s | %s" % w )
+            
         return True
 
     def Contar(urlLang):
+        _url_ = 'Dados/Funcionarios.csv'
+        _L = json.loads(inFile.read(urlLang))
+        attr = _L['attr']
+
+        print('\n')
+        f = open(_url_, "r", encoding='utf-8')
+        k = 1
+        arrA = []
+        arrB = []
+        arrC = []
+        while True :
+            row = f.readline()
+            if len(row) > 0:
+                arrA.append(row.split(';')[0])
+                arrB.append(row.split(';')[6])
+                arrC.append(row.split(';')[2])
+            else:
+                break
+
+        c = 0
+        i = 0
+        cat = ''
+        for x in arrA:
+            n = 0
+            for y in arrB:
+                if x == y:
+                    n = n + 1
+            if n > 0:
+                c = c + 1
+                cat = cat + ">>> "+arrC[i] + " Tem " + str(n) + " funcionários.\n"
+            i = i + 1
+        print( "\nFuncionários coordenadores ( %d )" % c )
+        print(cat)
+
         return True
 
     def Agrupar(urlLang):
+        _L = json.loads(inFile.read(urlLang))
+        attr = _L['attr']
+        x = 0
+        print('\n')
+
+        ff = open('Dados/Funcionarios.csv', "r", encoding='utf-8')
+        fc = open('Dados/Categorias.csv', "r", encoding='utf-8')
+
+        d1 = fc.readlines()
+        d2 = ff.readlines()
+        arr = []
+        for k in range(len(d1)):
+            c1 = 0
+            dd1 = d1[k].split(' ')
+            for l in range(len(d2)):
+                dd2 = d2[l].split(';')
+                if dd1[0] == dd2[3]:
+                    arr.append(dd1[2])
+                    break
+
+            if len(arr)>0:
+                print( 'A categoria ['+str(arr[len(arr)-1]).replace('\n','')+'] tem Funcionário!' )
+        
+        ff.close()
+        fc.close()
         return True
 
     def AgruparContar(urlLang):
+        _L = json.loads(inFile.read(urlLang))
+        attr = _L['attr']
+        x = 0
+        print('\n')
+
+        ff = open('Dados/Funcionarios.csv', "r", encoding='utf-8')
+        fc = open('Dados/Categorias.csv', "r", encoding='utf-8')
+
+        d1 = fc.readlines()
+        d2 = ff.readlines()
+
+        for k in range(len(d1)):
+            c1 = 0
+            dd1 = d1[k].split(' ')
+            for l in range(len(d2)):
+                dd2 = d2[l].split(';')
+                if dd1[0] == dd2[3]:
+                    c1 = c1 + 1
+                    
+            print( '> A categoria ['+str(dd1[2]).replace('\n','')+'] tem '+str(c1)+' Funcionário!' )
+        
+        ff.close()
+        fc.close()
         return True
 
     def Exportar(urlLang):
+        print('\n')
+        # MacOS
+        chrome_path = 'open -a /Applications/Google\ Chrome.app %s'
+        # Linux
+        chrome_path = '/usr/bin/google-chrome %s'
+        # Windows
+        chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+        osCommandString = "notepad.exe "
+        while True:
+            print('1 - Visualizar TXT')
+            print('2 - Visualizar CSV')
+            print('3 - Visualizar HTML')
+            r = input('\nEscolha uma das opções? ')
+            if r == '1':
+                tipo = 'txt'
+                os.system(osCommandString+'Dados/exportados/ficheiro.txt')
+                break
+            elif r == '2':
+                os.system('start excel.exe Dados/exportados/ficheiro.csv')
+                break
+            elif r == '3':
+                webbrowser.get(chrome_path).open('Dados/exportados/ficheiro.html')
+                break
+
         return True
 
     def Organograma(urlLang):
+        _L = json.loads(inFile.read(urlLang))
         return True

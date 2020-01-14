@@ -245,6 +245,75 @@ class inFile:
                 boo = True
         return boo
 
+    def update(id, arr, url):
+        f = open(url, 'rt', encoding='utf-8')
+        rows = f.readlines()
+        f.close()
+        cat = ''
+        
+        for r in rows:
+            r = r.rstrip('\n')
+            tmp = r.split(';')
+            if tmp[0] == id :
+                for x in range(0,len(arr)):
+                    if len(arr[x]) > 0 :
+                        tmp[x] = arr[x]
+                cat = cat + ";".join(tmp) + '\n'
+            else:
+                cat = cat + r + '\n'
+                continue
+
+        f = open(url, 'wt', encoding='utf-8')
+        f.write(cat)
+        f.close()
+
+    def delete(id, url):
+        f = open(url, 'rt', encoding='utf-8')
+        rows = f.readlines()
+        f.close()
+        cat = ''
+        
+        for r in rows:
+            r = r.rstrip('\n')
+            tmp = r.split(';')
+            if not tmp[0] == id :
+                cat = cat + r + '\n'
+                continue
+                
+        f = open(url, 'wt', encoding='utf-8')
+        f.write(cat)
+        f.close()
+
+    def export(arr):
+        url = 'Dados/exportados/ficheiro'
+
+        if len(arr) > 0:
+            stg = ";".join(arr)
+            f = open(url+".csv", "a+")
+            f.write( stg )
+            f.close()
+
+        if len(arr) > 0:
+            stg = " ".join(arr)
+            f = open(url+".txt", "a+")
+            f.write( stg )
+            f.close()
+
+        # Make an update
+        CAT = ''
+        fc = open(url+'.csv', "r", encoding='utf-8')
+        d1 = fc.readlines()
+        f = open(url+".html", "w+")
+        for k in range(len(d1)):
+            CAT = CAT + '<tr>'
+            dd1 = d1[k].split(';')
+            for j in range( len(dd1) ):
+                CAT = CAT + '<td>'+dd1[j]+'</td>'
+            CAT = CAT + '</tr>'
+
+        CAT = '<table border="1" width="100%" >' + CAT + '</table>'
+        f.write( CAT )
+        f.close()
 
 class _f:
     def intToChar(num, start0 = False):
