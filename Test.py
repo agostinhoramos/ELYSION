@@ -5,5 +5,5 @@ import json
 
 _L = json.loads(inFile.read('lang/pt-pt.json'))
 
-rd = "dsafdsaf %s fdgs" % ("Porra!")
+rd = "Hi %s, how are you?" % ("Agostinho Ramos")
 print( rd )
